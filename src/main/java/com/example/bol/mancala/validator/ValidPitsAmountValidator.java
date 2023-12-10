@@ -1,7 +1,9 @@
-package com.example.bol.mancala.configuration;
+package com.example.bol.mancala.validator;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 
 public class ValidPitsAmountValidator implements ConstraintValidator<ValidPitsAmount, Integer> {
@@ -11,6 +13,15 @@ public class ValidPitsAmountValidator implements ConstraintValidator<ValidPitsAm
 
     @Value("${mancala.pits.max}")
     private Integer maxPits;
+
+    @AllArgsConstructor
+    @Getter
+    public enum StringLiterals {
+        LESS("less"), MORE("more");
+
+        private final String name;
+
+    }
 
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext context) {

@@ -12,7 +12,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Getter
 @Setter
 @NoArgsConstructor
-public class MancalaGameNotFoundException extends Exception {
+public class MancalaGameNotFoundException extends RuntimeException {
 
     private final static String template = "Mancala game with id {0} does not exist";
     private final int code = NOT_FOUND.value();

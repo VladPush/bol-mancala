@@ -11,7 +11,7 @@ import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 @Getter
 @Setter
 @NoArgsConstructor
-public class MancalaGameValidationException extends Exception {
+public class MancalaGameValidationException extends RuntimeException {
 
     private final int code = UNPROCESSABLE_ENTITY.value();
 

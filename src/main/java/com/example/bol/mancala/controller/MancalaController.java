@@ -2,13 +2,11 @@ package com.example.bol.mancala.controller;
 
 import com.example.bol.mancala.dto.MancalaGameCreateDto;
 import com.example.bol.mancala.entity.MancalaGame;
-import com.example.bol.mancala.exception.MancalaGameNotFoundException;
 import com.example.bol.mancala.service.MancalaGameService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -24,17 +22,13 @@ public class MancalaController {
     }
 
     @GetMapping("/{gameId}")
-    private MancalaGame get(@PathVariable final UUID gameId) throws MancalaGameNotFoundException {
-        Optional<MancalaGame> mancalaGameOptional = gameService.get(gameId);
-        if (mancalaGameOptional.isEmpty()) {
-            throw new MancalaGameNotFoundException(gameId);
-        }
-        return mancalaGameOptional.get();
+    private MancalaGame get(@PathVariable final UUID gameId) {
+        return gameService.get(gameId);
     }
 
     @PutMapping("/{gameId}/move/{pit}")
-    private MancalaGame move(@PathVariable UUID gameId, @PathVariable String pit) {
-        return new MancalaGame();
+    private MancalaGame move(@PathVariable UUID gameId, @PathVariable(required = false) String pit) {
+        return gameService.move(gameId, pit);
     }
 
 }

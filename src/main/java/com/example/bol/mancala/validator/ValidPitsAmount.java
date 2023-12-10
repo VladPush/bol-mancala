@@ -1,4 +1,4 @@
-package com.example.bol.mancala.configuration;
+package com.example.bol.mancala.validator;
 
 
 import jakarta.validation.Constraint;

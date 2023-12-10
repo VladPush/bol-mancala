@@ -1,7 +1,7 @@
 package com.example.bol.mancala.dto;
 
-import com.example.bol.mancala.configuration.ValidPitsAmount;
 import com.example.bol.mancala.dto.enums.PlayerType;
+import com.example.bol.mancala.validator.ValidPitsAmount;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
