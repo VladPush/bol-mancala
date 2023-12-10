@@ -1,5 +1,7 @@
 package com.example.bol.mancala.entity;
 
+import com.example.bol.mancala.dto.enums.PlayerTurn;
+import com.example.bol.mancala.dto.enums.PlayerType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -20,7 +22,16 @@ public class MancalaGame {
     @UuidGenerator
     private UUID id;
 
+    @Enumerated(EnumType.STRING)
     private PlayerTurn turn;
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private PlayerType playerA = PlayerType.HUMAN;
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private PlayerType playerB = PlayerType.HUMAN;
 
     @SuppressWarnings("JpaDataSourceORMInspection")
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)

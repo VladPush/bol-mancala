@@ -1,5 +1,6 @@
 package com.example.bol.mancala.controller;
 
+import com.example.bol.mancala.dto.MancalaGameCreateDto;
 import com.example.bol.mancala.entity.MancalaGame;
 import com.example.bol.mancala.exception.MancalaGameNotFoundException;
 import com.example.bol.mancala.service.MancalaGameService;
@@ -16,9 +17,9 @@ public class MancalaController {
 
     private final MancalaGameService gameService;
 
-    @PostMapping("/{pitsAmount}/{stones}")
-    private MancalaGame create(@PathVariable int pitsAmount, @PathVariable int stones) {
-        return gameService.create(pitsAmount, stones);
+    @PostMapping
+    private MancalaGame create(@RequestBody MancalaGameCreateDto dto) {
+        return gameService.create(dto);
     }
 
     @GetMapping("/{gameId}")

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.bol.mancala.entity;
+package com.example.bol.mancala.dto.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
