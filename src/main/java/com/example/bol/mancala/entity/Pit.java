@@ -28,7 +28,4 @@ public class Pit {
         this.stones = stones;
     }
 
-    public static Pit createHousePit(int number) {
-        return new Pit(number, 0);
-    }
 }

@@ -23,6 +23,9 @@ public final class PitUtils {
         pit.setStones(pit.getStones() + stones);
     }
 
+    private static Pit createHousePit(int number) {
+        return new Pit(number, 0);
+    }
 
     public static ArrayList<Pit> createPits(int pitsAmount, int stones) {
         ArrayList<Pit> playersPits = new ArrayList<>();
@@ -32,9 +35,9 @@ public final class PitUtils {
 
 
         createPlayerPits(FIRST_PIT_NUMBER, pitsAmount + EXCLUSIVE_OFFSET, playersPits, stones);
-        playersPits.add(Pit.createHousePit(housePitNumberPlayerA));
+        playersPits.add(createHousePit(housePitNumberPlayerA));
         createPlayerPits(housePitNumberPlayerA + EXCLUSIVE_OFFSET, lastPitNumberPlayerB, playersPits, stones);
-        playersPits.add(Pit.createHousePit(lastPitNumberPlayerB));
+        playersPits.add(createHousePit(lastPitNumberPlayerB));
         return playersPits;
     }
 

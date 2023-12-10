@@ -4,6 +4,7 @@ import com.example.bol.mancala.dto.MancalaGameCreateDto;
 import com.example.bol.mancala.entity.MancalaGame;
 import com.example.bol.mancala.exception.MancalaGameNotFoundException;
 import com.example.bol.mancala.service.MancalaGameService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class MancalaController {
     private final MancalaGameService gameService;
 
     @PostMapping
-    private MancalaGame create(@RequestBody MancalaGameCreateDto dto) {
+    private MancalaGame create(@RequestBody @Valid MancalaGameCreateDto dto) {
         return gameService.create(dto);
     }
 

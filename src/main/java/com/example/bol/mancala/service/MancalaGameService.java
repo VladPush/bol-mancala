@@ -22,9 +22,9 @@ public class MancalaGameService implements MancalaGameApi, MancalaMoveApi {
     @Override
     public MancalaGame create(MancalaGameCreateDto dto) {
         MancalaGameBuilder builder = MancalaGame.builder()
-                .pits(PitUtils.createPits(dto.pitsAmount(), dto.stones()));
-        dto.playerA().ifPresent(builder::playerA);
-        dto.playerB().ifPresent(builder::playerB);
+                .pits(PitUtils.createPits(dto.getPitsAmount(), dto.getStones()));
+        dto.getPlayerA().ifPresent(builder::playerA);
+        dto.getPlayerB().ifPresent(builder::playerB);
 
         return mancalaRepository.save(builder.build());
     }
