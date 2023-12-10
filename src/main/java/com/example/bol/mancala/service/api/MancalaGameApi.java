@@ -1,13 +1,20 @@
 package com.example.bol.mancala.service.api;
 
-import com.example.bol.mancala.dto.MancalaGameCreateDto;
-import com.example.bol.mancala.entity.MancalaGame;
+import com.example.bol.mancala.dto.enums.PlayerTurn;
+import com.example.bol.mancala.entity.Pit;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-import java.util.UUID;
+import java.util.List;
 
+@FunctionalInterface
 public interface MancalaGameApi {
-    MancalaGame create(MancalaGameCreateDto dto);
+    MovedMancalaGameDto move(List<Pit> pits, Integer pit);
 
-    MancalaGame get(UUID gameId);
-
+    @AllArgsConstructor
+    @Getter
+    public class MovedMancalaGameDto {
+        private final List<Pit> pits;
+        private final PlayerTurn nextTurn;
+    }
 }

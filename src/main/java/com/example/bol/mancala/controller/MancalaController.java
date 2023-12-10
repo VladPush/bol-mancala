@@ -26,8 +26,8 @@ public class MancalaController {
         return gameService.get(gameId);
     }
 
-    @PutMapping("/{gameId}/move/{pit}")
-    private MancalaGame move(@PathVariable UUID gameId, @PathVariable(required = false) String pit) {
+    @PutMapping("/{gameId}/move")
+    private MancalaGame move(@PathVariable UUID gameId, @RequestParam(required = false) Integer pit) {
         return gameService.move(gameId, pit);
     }
 
