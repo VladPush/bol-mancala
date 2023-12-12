@@ -11,8 +11,8 @@ import com.example.bol.mancala.service.api.MancalaGameApi;
 import com.example.bol.mancala.service.move.MoveStrategy;
 import com.example.bol.mancala.service.move.MoveStrategyBuilder;
 import com.example.bol.mancala.util.PitUtils;
+import jdk.jshell.spi.ExecutionControl;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,7 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class MancalaGameService {
 
-    private final MancalaCachedRepository mancalaCachedRepository;
+    private final MancalaCachedRepository mancalaRepository;
     private final MancalaGameApi mancalaGameApi;
 
     public MancalaGame create(MancalaGameCreateDto dto) {
@@ -31,15 +31,14 @@ public class MancalaGameService {
         dto.getPlayerA().ifPresent(builder::playerA);
         dto.getPlayerB().ifPresent(builder::playerB);
 
-        return mancalaCachedRepository.save(builder.build());
+        return mancalaRepository.save(builder.build());
     }
 
     public MancalaGame get(UUID gameId) {
         return getGame(gameId);
     }
 
-    @SneakyThrows
-    public MancalaGame move(UUID gameId, Integer pit) {
+    public MancalaGame move(UUID gameId, Integer pit) throws ExecutionControl.NotImplementedException { // TODO remove this exception
         MancalaGame game = getGame(gameId);
 
         MoveStrategy moveStrategy = getMoveStrategy(game, pit);
@@ -47,7 +46,7 @@ public class MancalaGameService {
 
         MancalaGame movedGame = mancalaGameApi.move(game, pitForMove);
 
-        return mancalaCachedRepository.save(movedGame);
+        return mancalaRepository.save(movedGame);
     }
 
     private MoveStrategy getMoveStrategy(MancalaGame game, Integer pit) {
@@ -65,7 +64,7 @@ public class MancalaGameService {
     }
 
     private MancalaGame getGame(UUID gameId) {
-        Optional<MancalaGame> mancalaGameOptional = mancalaCachedRepository.findById(gameId);
+        Optional<MancalaGame> mancalaGameOptional = mancalaRepository.findById(gameId);
         if (mancalaGameOptional.isEmpty()) {
             throw new MancalaGameNotFoundException(gameId);
         }

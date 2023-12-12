@@ -1,6 +1,8 @@
 package com.example.bol.mancala.util;
 
 import com.example.bol.mancala.entity.Pit;
+import com.example.bol.mancala.exception.MancalaRulesExceptionType;
+import com.example.bol.mancala.exception.RulesExceptionFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public final class PitUtils {
         try {
             return pits.get(pitIndex - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new RuntimeException("Invalid pitIndex:" + pitIndex);
+            throw RulesExceptionFactory.createException(MancalaRulesExceptionType.INCORRECT_PIT_NUMBER);
         }
     }
 

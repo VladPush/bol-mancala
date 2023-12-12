@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.Duration;
 
-import static com.example.bol.mancala.configuration.Constants.MANCALA_GAME_CACHE_NAME;
+import static com.example.bol.mancala.configuration.Constants.CACHE_NAME_MANCALA_GAME;
 
 @Configuration
 public class CacheConfiguration {
@@ -25,7 +25,7 @@ public class CacheConfiguration {
 
     @Bean
     public CacheManager cacheManager() {
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager(MANCALA_GAME_CACHE_NAME);
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager(CACHE_NAME_MANCALA_GAME);
         cacheManager.setCaffeine(caffeineCacheBuilder());
         return cacheManager;
     }

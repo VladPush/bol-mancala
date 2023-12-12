@@ -1,22 +1,31 @@
 package com.example.bol.mancala.repository;
 
 import com.example.bol.mancala.entity.MancalaGame;
+import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.example.bol.mancala.configuration.Constants.MANCALA_GAME_CACHE_NAME;
+import static com.example.bol.mancala.configuration.Constants.CACHE_NAME_MANCALA_GAME;
 
-public interface MancalaCachedRepository extends CrudRepository<MancalaGame, UUID> {
+@Service
+@RequiredArgsConstructor
+@CacheConfig(cacheNames = CACHE_NAME_MANCALA_GAME)
+public class MancalaCachedRepository {
 
-    @EntityGraph(attributePaths = {"pits"})
-    @Cacheable(value = MANCALA_GAME_CACHE_NAME, key = "#id")
-    Optional<MancalaGame> findById(UUID id);
+    private final MancalaRepository mancalaRepository;
 
-    @CachePut(value = MANCALA_GAME_CACHE_NAME, key = "#entity.id")
-    MancalaGame save(MancalaGame entity);
+    @Cacheable(key = "#id")
+    public Optional<MancalaGame> findById(UUID id) {
+        return mancalaRepository.findById(id);
+    }
+
+    @CachePut(key = "#entity.id")
+    public MancalaGame save(MancalaGame entity) {
+        return mancalaRepository.save(entity);
+    }
 }

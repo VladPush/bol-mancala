@@ -4,6 +4,7 @@ import com.example.bol.mancala.dto.MancalaGameCreateDto;
 import com.example.bol.mancala.entity.MancalaGame;
 import com.example.bol.mancala.service.MancalaGameService;
 import jakarta.validation.Valid;
+import jdk.jshell.spi.ExecutionControl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class MancalaController {
     }
 
     @PutMapping("/{gameId}/move")
-    private MancalaGame move(@PathVariable UUID gameId, @RequestParam(required = false) Integer pit) {
+    private MancalaGame move(@PathVariable UUID gameId, @RequestParam(required = false) Integer pit) throws ExecutionControl.NotImplementedException {
         return gameService.move(gameId, pit);
     }
 
