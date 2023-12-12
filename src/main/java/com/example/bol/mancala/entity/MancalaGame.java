@@ -23,7 +23,8 @@ public class MancalaGame {
     private UUID id;
 
     @Enumerated(EnumType.STRING)
-    private PlayerTurn turn;
+    @Builder.Default
+    private PlayerTurn turn = PlayerTurn.PlayerA;
 
     @Enumerated(EnumType.STRING)
     @Builder.Default

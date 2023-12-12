@@ -21,6 +21,12 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(ex.getCode()).body(ex);
     }
 
+    @ExceptionHandler(MancalaGameRulesException.class)
+    public ResponseEntity<? extends Exception> handleBadRequestException(MancalaGameRulesException ex) {
+        ex.setStackTrace(stackTrace);
+        return ResponseEntity.status(ex.getCode()).body(ex);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<? extends Exception> handleBadRequestException(MethodArgumentNotValidException ex) {
         List<String> validationErrorsMessages = ex.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList();

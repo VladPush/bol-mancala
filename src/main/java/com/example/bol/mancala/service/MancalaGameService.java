@@ -34,7 +34,6 @@ public class MancalaGameService {
         return mancalaCachedRepository.save(builder.build());
     }
 
-
     public MancalaGame get(UUID gameId) {
         return getGame(gameId);
     }
@@ -42,17 +41,13 @@ public class MancalaGameService {
     @SneakyThrows
     public MancalaGame move(UUID gameId, Integer pit) {
         MancalaGame game = getGame(gameId);
+
         MoveStrategy moveStrategy = getMoveStrategy(game, pit);
+        int pitForMove = moveStrategy.getPitForMove(game.getPits(), game.getTurn());
 
-        PlayerTurn currentTurn = game.getTurn();
-        int pitForMove = moveStrategy.getPitForMove(game.getPits(), currentTurn);
+        MancalaGame movedGame = mancalaGameApi.move(game, pitForMove);
 
-        MancalaGameApi.MovedMancalaGameDto movedGame = mancalaGameApi.move(game.getPits(), pitForMove);
-
-        game.setPits(movedGame.getPits());
-        game.setTurn(movedGame.getNextTurn());
-
-        return mancalaCachedRepository.save(game);
+        return mancalaCachedRepository.save(movedGame);
     }
 
     private MoveStrategy getMoveStrategy(MancalaGame game, Integer pit) {
@@ -66,8 +61,7 @@ public class MancalaGameService {
 
 
     private PlayerType getPlayerTypeForCurrentMove(MancalaGame game) {
-        PlayerTurn turn = game.getTurn();
-        return (turn == null || PlayerTurn.PlayerA == turn) ? game.getPlayerA() : game.getPlayerB();
+        return PlayerTurn.PlayerA == game.getTurn() ? game.getPlayerA() : game.getPlayerB();
     }
 
     private MancalaGame getGame(UUID gameId) {

@@ -11,8 +11,8 @@ public class HumanMoveStrategy implements MoveStrategy {
     private final Integer pit;
 
     public HumanMoveStrategy(Integer pit) {
-        if (pit == null) {
-            throw new IllegalArgumentException("Please specify pit number for this strategy"); //TODO own exception
+        if (pit == null || pit <= 0) {
+            throw new IllegalArgumentException("Please specify pit number for this strategy");
         }
         this.pit = pit;
     }

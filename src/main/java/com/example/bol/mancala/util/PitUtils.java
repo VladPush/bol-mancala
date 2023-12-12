@@ -3,16 +3,23 @@ package com.example.bol.mancala.util;
 import com.example.bol.mancala.entity.Pit;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public final class PitUtils {
 
+    public static final int ZERO_STONES = 0;
     private static final int FIRST_PIT_NUMBER = 1;
     private static final int EXCLUSIVE_OFFSET = 1;
     private static final int SECOND_PLAYER_PIT_MULTIPLIER = 2;
 
     public static void clear(Pit pit) {
         pit.setStones(0);
+    }
+
+
+    public static boolean isEmpty(Pit pit) {
+        return pit.getStones() == 0;
     }
 
     public static void addStone(Pit pit) {
@@ -25,6 +32,14 @@ public final class PitUtils {
 
     private static Pit createHousePit(int number) {
         return new Pit(number, 0);
+    }
+
+    public static Pit getPit(List<Pit> pits, int pitIndex) {
+        try {
+            return pits.get(pitIndex - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new RuntimeException("Invalid pitIndex:" + pitIndex);
+        }
     }
 
     public static ArrayList<Pit> createPits(int pitsAmount, int stones) {
