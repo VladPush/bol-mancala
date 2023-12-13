@@ -81,7 +81,7 @@ public class MancalaGameDefaultRulesApi implements MancalaGameApi {
 
         Pit targetPit = PitUtils.getPit(game.getPits(), currentPitIndex);
 
-        if (supportDto.getStones() != 1) {
+        if (supportDto.getStones() != 1 || targetPit.getNumber() == supportDto.getPlayerAHousePitNumber() || targetPit.getNumber() == supportDto.getPlayerBHousePitNumber()) {
             placeStone(supportDto, targetPit);
             return;
         }
@@ -107,10 +107,10 @@ public class MancalaGameDefaultRulesApi implements MancalaGameApi {
     @AllArgsConstructor
     @Getter
     private static class MoveSupportDto {
-        private final int playerAHousePitNumber;
-        private final int playerBHousePitNumber;
         private int currentPitIndex;
         private int stones;
+        private final int playerAHousePitNumber;
+        private final int playerBHousePitNumber;
 
         public int getTotalPits() {
             return playerBHousePitNumber;

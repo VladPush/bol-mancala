@@ -18,17 +18,17 @@ public class MancalaController {
     private final MancalaGameService gameService;
 
     @PostMapping
-    private MancalaGame create(@RequestBody @Valid MancalaGameCreateDto dto) {
+    public MancalaGame create(@RequestBody @Valid MancalaGameCreateDto dto) {
         return gameService.create(dto);
     }
 
     @GetMapping("/{gameId}")
-    private MancalaGame get(@PathVariable final UUID gameId) {
+    public MancalaGame get(@PathVariable final UUID gameId) {
         return gameService.get(gameId);
     }
 
     @PutMapping("/{gameId}/move")
-    private MancalaGame move(@PathVariable UUID gameId, @RequestParam(required = false) Integer pit) throws ExecutionControl.NotImplementedException {
+    public MancalaGame move(@PathVariable UUID gameId, @RequestParam(required = false) Integer pit) throws ExecutionControl.NotImplementedException {
         return gameService.move(gameId, pit);
     }
 

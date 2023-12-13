@@ -3,20 +3,22 @@ package com.example.bol.mancala.dto;
 import com.example.bol.mancala.dto.enums.PlayerType;
 import com.example.bol.mancala.validator.ValidPitsAmount;
 import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.Optional;
 
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
-public final class MancalaGameCreateDto {
+@NoArgsConstructor
+public class MancalaGameCreateDto {
     @ValidPitsAmount
-    private final int pitsAmount;
+    private int pitsAmount;
     @Positive
-    private final int stones;
-    private final Optional<PlayerType> playerA;
-    private final Optional<PlayerType> playerB;
+    private int stones;
+    private Optional<PlayerType> playerA;
+    private Optional<PlayerType> playerB;
 
 }

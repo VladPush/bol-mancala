@@ -2,20 +2,19 @@ package com.example.bol.mancala.repository;
 
 import com.example.bol.mancala.AbstractIntegrationTest;
 import com.example.bol.mancala.dto.enums.PlayerTurn;
-import com.example.bol.mancala.dto.enums.PlayerType;
 import com.example.bol.mancala.entity.MancalaGame;
-import com.example.bol.mancala.entity.Pit;
+import com.example.bol.mancala.test.helper.builder.MancalaGameEntityBuilder;
+import com.example.bol.mancala.util.PitUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+
 
 public class MancalaCachedRepositoryTest extends AbstractIntegrationTest {
 
@@ -27,10 +26,8 @@ public class MancalaCachedRepositoryTest extends AbstractIntegrationTest {
 
     @Test
     public void findByIdEager() {
-        MancalaGame mancalaGame = MancalaGame.builder()
-                .playerA(PlayerType.HUMAN)
-                .playerB(PlayerType.HUMAN)
-                .pits(List.of(new Pit(1, 2), new Pit(2, 2)))
+        MancalaGame mancalaGame = MancalaGameEntityBuilder.aGame()
+                .withPits(PitUtils.createPits(2, 2))
                 .build();
 
         mancalaCachedRepository.save(mancalaGame);
@@ -44,11 +41,7 @@ public class MancalaCachedRepositoryTest extends AbstractIntegrationTest {
 
     @Test
     public void savePutInCache() {
-        MancalaGame mancalaGame = MancalaGame.builder()
-                .playerA(PlayerType.HUMAN)
-                .playerB(PlayerType.HUMAN)
-                .pits(new ArrayList<>())
-                .build();
+        MancalaGame mancalaGame = MancalaGameEntityBuilder.aGame().build();
 
         mancalaCachedRepository.save(mancalaGame);
 
@@ -60,11 +53,7 @@ public class MancalaCachedRepositoryTest extends AbstractIntegrationTest {
 
     @Test
     public void saveChangeValueInCache() {
-        MancalaGame mancalaGame = MancalaGame.builder()
-                .playerA(PlayerType.HUMAN)
-                .playerB(PlayerType.HUMAN)
-                .pits(new ArrayList<>())
-                .build();
+        MancalaGame mancalaGame = MancalaGameEntityBuilder.aGame().build();
         mancalaRepository.saveAndFlush(mancalaGame);
         Optional<MancalaGame> originalGameOprional = mancalaCachedRepository.findById(mancalaGame.getId());
 
@@ -82,11 +71,7 @@ public class MancalaCachedRepositoryTest extends AbstractIntegrationTest {
 
     @Test
     public void findByIdPutInCache() {
-        MancalaGame mancalaGame = MancalaGame.builder()
-                .playerA(PlayerType.HUMAN)
-                .playerB(PlayerType.HUMAN)
-                .pits(new ArrayList<>())
-                .build();
+        MancalaGame mancalaGame = MancalaGameEntityBuilder.aGame().build();
 
         mancalaRepository.saveAndFlush(mancalaGame);
 
