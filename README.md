@@ -5,6 +5,8 @@
 3. Right-click on the main class and select "Run" from the context menu.
 4. Alternatively, you can click on the green arrow icon located on the left-hand side of the main class to run it.
 
+> Note: you should have running Docker to start application.
+
 #### Java Parameters
 
 Below is a list of common Java parameters that can be used when running a Java application, along with explanations for
