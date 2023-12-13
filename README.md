@@ -7,7 +7,7 @@
 
 ### Api
 
-Use [swagger-ui](http://) to explore api.
+Use [swagger-ui](http://localhost:8080/swagger-ui/index.html) to explore api.
 
 ### Test
 
