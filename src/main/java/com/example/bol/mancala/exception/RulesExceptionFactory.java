@@ -10,6 +10,8 @@ public class RulesExceptionFactory {
             case HOUSE_MOVE_PIT -> new MancalaGameRulesException(HOUSE_MOVE_PIT.getMessage());
             case NOT_OWNER_MOVE_PIT -> new MancalaGameRulesException(NOT_OWNER_MOVE_PIT.getMessage());
             case INCORRECT_PIT_NUMBER -> new MancalaGameRulesException(INCORRECT_PIT_NUMBER.getMessage());
+            case INCORRECT_PIT_NUMBER_OUT_OF_RANGE ->
+                    new MancalaGameRulesException(INCORRECT_PIT_NUMBER_OUT_OF_RANGE.getMessage());
         };
     }
 }

@@ -6,6 +6,7 @@ import com.example.bol.mancala.dto.enums.PlayerType;
 import com.example.bol.mancala.entity.MancalaGame;
 import com.example.bol.mancala.entity.MancalaGame.MancalaGameBuilder;
 import com.example.bol.mancala.exception.MancalaGameNotFoundException;
+import com.example.bol.mancala.exception.RulesExceptionFactory;
 import com.example.bol.mancala.repository.MancalaCachedRepository;
 import com.example.bol.mancala.service.api.MancalaGameApi;
 import com.example.bol.mancala.service.move.MoveStrategy;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
+
+import static com.example.bol.mancala.exception.MancalaRulesExceptionType.INCORRECT_PIT_NUMBER_OUT_OF_RANGE;
 
 @Service
 @RequiredArgsConstructor
@@ -40,6 +43,10 @@ public class MancalaGameService {
 
     public MancalaGame move(UUID gameId, Integer pit) throws ExecutionControl.NotImplementedException { // TODO remove this exception
         MancalaGame game = getGame(gameId);
+
+        if (pit <= 0 || pit > game.getPits().size()) {
+            throw RulesExceptionFactory.createException(INCORRECT_PIT_NUMBER_OUT_OF_RANGE);
+        }
 
         MoveStrategy moveStrategy = getMoveStrategy(game, pit);
         int pitForMove = moveStrategy.getPitForMove(game.getPits(), game.getTurn());
