@@ -5,6 +5,37 @@
 3. Right-click on the main class and select "Run" from the context menu.
 4. Alternatively, you can click on the green arrow icon located on the left-hand side of the main class to run it.
 
+#### Java Parameters
+
+Below is a list of common Java parameters that can be used when running a Java application, along with explanations for
+each parameter.
+
+##### mancala_pits_min
+
+- **Description:** Minimal value of pits in mancala game. Default value - 6.
+- **Example:** mancala_pits_min=8 sets minimum value of pits to 8.
+
+##### mancala_pits_max
+
+- **Description:** Maximum value of pits in mancala game. Default value - 10.
+- **Example:** mancala_pits_max=14 sets maximum value of pits to 14.
+
+##### mancala_cache_initial_capacity
+
+- **Description:** Starting capacity of mancala game cache. Default value - 100.
+- **Example:** mancala_cache_initial_capacity=10 mean that initially size of cache will be 10.
+
+##### mancala_cache_maximum_size
+
+- **Description:** Maximum capacity of mancala game cache. Default value - 500.
+- **Example:** mancala_cache_maximum_size=800 mean that maximum amount of games in cache can be 800.
+
+##### mancala_cache_expire_after_write
+
+- **Description:** Maximum life time for cache after last usage. Default value - 5 minute.
+- **Example:** mancala_cache_expire_after_write=2 mean that object will remain in the cache for a maximum of 2 minutes
+  after its last use.
+
 ### Api
 
 Use [swagger-ui](http://localhost:8080/swagger-ui/index.html) to explore api.
