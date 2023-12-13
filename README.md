@@ -11,8 +11,9 @@ Use [swagger-ui](http://) to explore api.
 
 ### Test
 
-Use command `mvn test` to start tests.
+Use command `mvn test` to start unit tests.
 
+Use command `mvn verify` to start unit + integration tests.
 
 <details>
 <summary> About Mancala game</summary>

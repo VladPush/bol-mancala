@@ -16,7 +16,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
-public class MancalaCachedRepositoryTest extends AbstractIntegrationTest {
+public class MancalaCachedRepositoryIntegrationTest extends AbstractIntegrationTest {
 
     @SpyBean
     private MancalaCachedRepository mancalaCachedRepository;
